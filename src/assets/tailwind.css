@@ -1,0 +1,7 @@
+:root {
+  --color-primary: #1877f2;
+  --color-green-fb: #42b72a;
+}
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
