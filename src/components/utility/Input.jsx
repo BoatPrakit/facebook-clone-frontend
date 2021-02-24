@@ -1,5 +1,5 @@
 export default function Input(props) {
-  const className = `w-full h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-8 shadow-lg ${props.className}`;
+  const className = `w-full h-16 px-3 rounded mb-8 focus:outline-none focus:shadow-outline text-xl px-4 shadow-lg ${props.className}`;
   return (
     <input
       className={className}

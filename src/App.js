@@ -1,8 +1,19 @@
-import AuthPage from './components/AuthPage'
+import AuthPage from './components/Authentication/AuthPage'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import Register from './components/Authentication/Register'
+import checkAuth from './components/HOCs/checkAuth'
+import checkLogin from './components/HOCs/checkLogin'
+import Home from './components/Home'
 function App() {
   return (
       <div>
-        <AuthPage />
+        <Router>
+          <Switch>
+            <Route path="/" exact component={checkAuth(Home)} />
+            <Route path="/register" component={Register} />
+            <Route path="/login" component={checkLogin(AuthPage)} />
+          </Switch>
+        </Router>
       </div> 
   );
 }
