@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import Input from "../utility/Input";
 import axios from "axios";
@@ -8,6 +8,8 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [dob, setDOB] = useState(null);
+  const history = useHistory();
+  // const [image, setImage]  = useState("");
   async function handleRegister(event) {
     event.preventDefault();
     try {
@@ -22,9 +24,11 @@ export default function Register() {
           gender: document.querySelector("input[name=gender]").value,
         }
       );
-      console.log(response);
+      if (response.status === 200) {
+        history.push("/login");
+      }
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   }
   return (
@@ -71,7 +75,7 @@ export default function Register() {
             <Input
               type="date"
               name="dob"
-              onChange={(value) => setDOB(new Date(value))}
+              onChange={(value) => setDOB(new Date(value).getTime())}
             ></Input>
             <h3 className="text-2xl text-gray-500">เพศ</h3>
             <div className="flex">

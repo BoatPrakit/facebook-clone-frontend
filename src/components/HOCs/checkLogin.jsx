@@ -12,9 +12,11 @@ const checkLogin = (Component) => (props) => {
         });
         if (response.status === 200) {
           setRedirectToHome(true);
-          setIsLoading(false);
         }
-      } catch (err) {}
+        setIsLoading(false);
+      } catch (err) {
+        setIsLoading(false);
+      }
     }
     checkPermission();
   });
