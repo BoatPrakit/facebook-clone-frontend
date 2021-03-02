@@ -1,6 +1,19 @@
 :root {
   --color-primary: #1877f2;
   --color-green-fb: #42b72a;
+  --height-header: 56px;
+  --color-body-bg: #18191a;
+  --color-navbar-bg: #242526;
+  --color-primary-blue: #2d88ff;
+}
+.height-header {
+  height: var(--height-header);
+}
+.top-header {
+  top: var(--height-header);
+}
+.min-h-header {
+  min-height: calc(100vh - var(--height-header));
 }
 @import "tailwindcss/base";
 @import "tailwindcss/components";

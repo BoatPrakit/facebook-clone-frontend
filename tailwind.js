@@ -28,6 +28,8 @@ module.exports = {
       pink: colors.pink,
       primary: "var(--color-primary)",
       greenFb: "var(--color-green-fb)",
+      bodyBg: "var(--color-body-bg)",
+      navBarBg: "var(--color-navbar-bg)"
     },
     spacing: {
       px: '1px',
