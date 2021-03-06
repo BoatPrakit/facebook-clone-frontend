@@ -1,21 +1,23 @@
 import AuthPage from './components/Authentication/AuthPage'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import Register from './components/Authentication/Register'
-import checkAuth from './components/HOCs/checkAuth'
-import checkLogin from './components/HOCs/checkLogin'
 import Home from './components/home/Home'
+import React, { useState } from 'react'
+const GlobalContext = React.createContext();
+
 function App() {
+  const [user, setUser] = useState(null);
   return (
-      <div>
         <Router>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/register" component={Register} />
-            <Route path="/login" component={checkLogin(AuthPage)} />
-          </Switch>
+            <Switch>
+          <GlobalContext.Provider value={{ user,setUser }}>
+              <Route path="/" exact ><Home /></Route>
+              <Route path="/register" component={Register} />
+              <Route path="/login" component={AuthPage} />
+          </GlobalContext.Provider>    
+            </Switch>
         </Router>
-      </div> 
   );
 }
-
+export { GlobalContext }
 export default App;

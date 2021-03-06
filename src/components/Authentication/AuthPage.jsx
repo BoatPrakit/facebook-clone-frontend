@@ -1,13 +1,16 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Input from "../utility/Input";
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
+import { GlobalContext } from "../../App";
 
 export default function AuthPage() {
-  const history = useHistory();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [hiddenClass, setHiddenClass] = useState("invisible");
+  const [isRedirectToHome, setIsRedirectToHome] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const { user, setUser } = useContext(GlobalContext);
   async function handleSubmit(event) {
     event.preventDefault();
     if (password && email) {
@@ -24,7 +27,12 @@ export default function AuthPage() {
           }
         );
         if (response.status === 200) {
-          history.push("/");
+          setIsRedirectToHome(true);
+          const responseUser = await axios.get(
+            "http://localhost:5000/api/user",
+            { withCredentials: true }
+          );
+          setUser(responseUser);
         }
       } catch (err) {
         setHiddenClass("");
@@ -33,6 +41,28 @@ export default function AuthPage() {
       setHiddenClass("");
     }
   }
+  useEffect(() => {
+    let source = axios.CancelToken.source();
+    async function checkCookie() {
+      try {
+        const response = await axios.get("http://localhost:5000/api/user", {
+          withCredentials: true,
+          cancelToken: source.token,
+        });
+        if (response.status === 200) {
+          setUser(response.data);
+          setIsRedirectToHome(true);
+          setIsLoading(false);
+        }
+      } catch (err) {
+        setIsLoading(false);
+      }
+    }
+    checkCookie();
+    return () => source.cancel("Cancelled");
+  }, [user, setUser]);
+  if (isLoading) return null;
+  if (isRedirectToHome) return <Redirect to="/"></Redirect>;
   return (
     <div className="bg-gray-100">
       <div className="container mx-auto flex items-center min-h-screen justify-center">

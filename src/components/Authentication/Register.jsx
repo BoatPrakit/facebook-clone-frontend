@@ -9,7 +9,6 @@ export default function Register() {
   const [password, setPassword] = useState("");
   const [dob, setDOB] = useState(null);
   const history = useHistory();
-  // const [image, setImage]  = useState("");
   async function handleRegister(event) {
     event.preventDefault();
     try {
