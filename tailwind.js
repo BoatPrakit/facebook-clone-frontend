@@ -705,6 +705,8 @@ module.exports = {
       '9/12': '75%',
       '10/12': '83.333333%',
       '11/12': '91.666667%',
+      'side': '360px',
+      'main': '744px',
       full: '100%',
       screen: '100vw',
       min: 'min-content',
