@@ -17,7 +17,7 @@ export default function AuthPage() {
       setHiddenClass("invisible");
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/user/login",
+          "http://localhost:5000/api/auth/login",
           {
             email: email,
             password: password,
@@ -29,7 +29,7 @@ export default function AuthPage() {
         if (response.status === 200) {
           setIsRedirectToHome(true);
           const responseUser = await axios.get(
-            "http://localhost:5000/api/user",
+            "http://localhost:5000/api/auth",
             { withCredentials: true }
           );
           setUser(responseUser);
@@ -45,7 +45,7 @@ export default function AuthPage() {
     let source = axios.CancelToken.source();
     async function checkCookie() {
       try {
-        const response = await axios.get("http://localhost:5000/api/user", {
+        const response = await axios.get("http://localhost:5000/api/auth", {
           withCredentials: true,
           cancelToken: source.token,
         });
