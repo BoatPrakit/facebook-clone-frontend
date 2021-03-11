@@ -30,7 +30,6 @@ export default function MainContent(props) {
         }
       );
       const posts = response.data;
-      console.log(posts);
       if (posts) {
         if (posts.allPost.length) setPostCollection(posts.allPost);
         else setPostCollection(null);

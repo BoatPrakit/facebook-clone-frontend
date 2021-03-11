@@ -3,12 +3,13 @@ import { Link, Redirect } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../App";
 import axios from "axios";
+import SearchList from "../SearchList/SearchList";
 export default function Navbar() {
   const { user, setUser } = useContext(GlobalContext);
   const [isRedirectToLogin, setIsRedirectToLogin] = useState(false);
   async function logout() {
     try {
-      await axios.get("http://localhost:5000/api/user/logout", {
+      await axios.get("http://localhost:5000/api/auth/logout", {
         withCredentials: true,
       });
       setIsRedirectToLogin(true);
@@ -19,11 +20,12 @@ export default function Navbar() {
   }, [isRedirectToLogin, setUser]);
   if (isRedirectToLogin) return <Redirect to="/login" />;
   return (
-    <div className="bg-navBarBg fixed flex height-header w-full items-center justify-between">
-      <div className="p-1 pl-2 w-side">
+    <div className="bg-navBarBg fixed flex height-header w-full items-center justify-between z-10">
+      <div className="p-1 pl-2 w-side flex">
         <Link to="/">
           <img src={logo} alt="" width="40px" />
         </Link>
+        <SearchList />
       </div>
       <div className="flex text-2xl h-full w-main justify-between">
         <Link
