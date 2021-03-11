@@ -14,7 +14,7 @@ export default function RightSide(props) {
     requestFriendList();
   });
   return (
-    <div className="flex flex-col w-side p-3">
+    <div className="flex flex-col w-side p-3 fixed right-0">
       <h1 className="text-2xl font-bold border-b-2 border-gray-500 py-3">
         รายชื่อเพื่อน
       </h1>

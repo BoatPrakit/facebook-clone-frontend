@@ -15,9 +15,9 @@ export default function Home() {
   }, [user, isRedirect]);
   if (isRedirect || !user) return <Redirect to="/login" />;
   return (
-    <div className="bg-bodyBg relative min-h-screen">
+    <div className="relative">
       <Navbar />
-      <div className="flex justify-between text-white min-h-header pt-3 relative top-header">
+      <div className="flex text-white min-h-header h-full bg-bodyBg pt-6 relative top-header">
         <LeftSide user={user} />
         <MainContent user={user} />
         <RightSide user={user} />

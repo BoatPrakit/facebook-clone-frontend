@@ -20,9 +20,7 @@ export default function MainContent(props) {
       setText("");
     }
   }
-  function handleCancel() {
-    setText("");
-  }
+
   useEffect(() => {
     async function getPosts() {
       const response = await axios.get(
@@ -31,14 +29,18 @@ export default function MainContent(props) {
           withCredentials: true,
         }
       );
-      const posts = response.data.allPost;
-      if (posts) setPostCollection(posts);
+      const posts = response.data;
+      console.log(posts);
+      if (posts) {
+        if (posts.allPost.length) setPostCollection(posts.allPost);
+        else setPostCollection(null);
+      }
     }
     getPosts();
     setShouldReRender(false);
   }, [shouldReRender]);
   return (
-    <div className="flex max-w-full">
+    <div className="flex w-full justify-center">
       <div className="w-main">
         <div className="w-full bg-navBarBg p-5">
           <form onSubmit={handlePost}>
@@ -56,19 +58,24 @@ export default function MainContent(props) {
                 โพสต์
               </button>
               <button
-                onClick={handleCancel}
+                onClick={() => setText("")}
                 className="p-2 px-5 rounded bg-gray-600"
+                type="button"
               >
                 ยกเลิก
               </button>
             </div>
           </form>
         </div>
-        <div className="flex flex-col-reverse">
+        <div className="flex flex-col-reverse mt-3">
           {postCollection
             ? postCollection.map((post) => (
                 <div key={post.postId._id}>
-                  <Post user={user} post={post.postId} />
+                  <Post
+                    user={user}
+                    post={post.postId}
+                    setShouldReRender={(value) => setShouldReRender(value)}
+                  />
                 </div>
               ))
             : "คุณไม่มี Post ใดๆ"}
