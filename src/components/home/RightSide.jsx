@@ -5,9 +5,7 @@ export default function RightSide(props) {
   const [friends, setFriends] = useState(null);
   useEffect(() => {
     async function requestFriendList() {
-      const response = await axios.get(`/relationship/friends`, {
-        withCredentials: true,
-      });
+      const response = await axios.get(`/relationship/friends`);
       setFriends(response.data);
     }
     requestFriendList();

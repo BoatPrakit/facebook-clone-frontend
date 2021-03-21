@@ -16,16 +16,10 @@ export default function AuthPage() {
     if (password && email) {
       setHiddenClass("invisible");
       try {
-        const response = await axios.post(
-          "/api/auth/login",
-          {
-            email: email,
-            password: password,
-          },
-          {
-            withCredentials: true,
-          }
-        );
+        const response = await axios.post("/api/auth/login", {
+          email: email,
+          password: password,
+        });
         if (response.status === 200) {
           setIsRedirectToHome(true);
           const responseUser = await axios.get("/api/auth", {

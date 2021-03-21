@@ -8,13 +8,9 @@ export default function MainContent(props) {
   const [shouldReRender, setShouldReRender] = useState(false);
   async function handlePost(event) {
     event.preventDefault();
-    const response = await axios.post(
-      "/api/post/add",
-      {
-        description: text,
-      },
-      { withCredentials: true }
-    );
+    const response = await axios.post("/api/post/add", {
+      description: text,
+    });
     if (response.status === 200) {
       setShouldReRender(true);
       setText("");
@@ -23,9 +19,7 @@ export default function MainContent(props) {
 
   useEffect(() => {
     async function getPosts() {
-      const response = await axios.get("/api/post/mypost", {
-        withCredentials: true,
-      });
+      const response = await axios.get("/api/post/mypost");
       const posts = response.data;
       if (posts) {
         if (posts.allPost.length) setPostCollection(posts.allPost);

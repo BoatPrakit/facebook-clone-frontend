@@ -6,9 +6,7 @@ export default function Post(props) {
   const { _id, postOn, description, isEdited, likes, comments } = post;
   const postDate = new Date(postOn);
   async function deletePost() {
-    await axios.delete(`/api/post/delete/${_id}`, {
-      withCredentials: true,
-    });
+    await axios.delete(`/api/post/delete/${_id}`);
     props.setShouldReRender(true);
   }
   return (

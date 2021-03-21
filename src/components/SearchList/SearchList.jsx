@@ -12,8 +12,7 @@ export default function SearchList() {
     let queryLastName = `&lastName=${lastName}`;
     if (!lastName) queryLastName = "";
     const response = await axios.get(
-      `/api/user/${queryFirstName}${queryLastName}`,
-      { withCredentials: true }
+      `/api/user/${queryFirstName}${queryLastName}`
     );
     if (response.status === 200) {
       setPeopleCollection(response.data);
