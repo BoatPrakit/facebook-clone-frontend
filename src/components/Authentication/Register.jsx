@@ -1,7 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import { useState } from "react";
 import Input from "../utility/Input";
-import axios from "axios";
+import axios from "../../axiosInstance/backend.instance";
 export default function Register() {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -12,17 +12,14 @@ export default function Register() {
   async function handleRegister(event) {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        {
-          firstName: name,
-          lastName: lastName,
-          email: email,
-          password: password,
-          dob: dob,
-          gender: document.querySelector("input[name=gender]").value,
-        }
-      );
+      const response = await axios.post("/api/auth/register", {
+        firstName: name,
+        lastName: lastName,
+        email: email,
+        password: password,
+        dob: dob,
+        gender: document.querySelector("input[name=gender]").value,
+      });
       if (response.status === 200) {
         history.push("/login");
       }

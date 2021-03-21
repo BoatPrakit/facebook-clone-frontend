@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Input from "../utility/Input";
 import { Link, Redirect } from "react-router-dom";
-import axios from "axios";
+import axios from "../../axiosInstance/backend.instance";
 import { GlobalContext } from "../../App";
 
 export default function AuthPage() {
@@ -17,7 +17,7 @@ export default function AuthPage() {
       setHiddenClass("invisible");
       try {
         const response = await axios.post(
-          "http://localhost:5000/api/auth/login",
+          "/api/auth/login",
           {
             email: email,
             password: password,
@@ -28,10 +28,9 @@ export default function AuthPage() {
         );
         if (response.status === 200) {
           setIsRedirectToHome(true);
-          const responseUser = await axios.get(
-            "http://localhost:5000/api/auth",
-            { withCredentials: true }
-          );
+          const responseUser = await axios.get("/api/auth", {
+            withCredentials: true,
+          });
           setUser(responseUser);
         }
       } catch (err) {
@@ -45,7 +44,7 @@ export default function AuthPage() {
     let source = axios.CancelToken.source();
     async function checkCookie() {
       try {
-        const response = await axios.get("http://localhost:5000/api/auth", {
+        const response = await axios.get("/api/auth", {
           withCredentials: true,
           cancelToken: source.token,
         });

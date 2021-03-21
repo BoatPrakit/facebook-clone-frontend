@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../../axiosInstance/backend.instance";
 import { useState } from "react";
 import People from "./People";
 export default function SearchList() {
@@ -12,7 +12,7 @@ export default function SearchList() {
     let queryLastName = `&lastName=${lastName}`;
     if (!lastName) queryLastName = "";
     const response = await axios.get(
-      `http://localhost:5000/api/user/${queryFirstName}${queryLastName}`,
+      `/api/user/${queryFirstName}${queryLastName}`,
       { withCredentials: true }
     );
     if (response.status === 200) {

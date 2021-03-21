@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axios from "../../axiosInstance/backend.instance";
 export default function RightSide(props) {
   const [friends, setFriends] = useState(null);
   useEffect(() => {
     async function requestFriendList() {
-      const response = await axios.get(
-        `http://localhost:5000/relationship/friends`,
-        { withCredentials: true }
-      );
+      const response = await axios.get(`/relationship/friends`, {
+        withCredentials: true,
+      });
       setFriends(response.data);
     }
     requestFriendList();

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../../axiosInstance/backend.instance";
 import Post from "./Post";
 export default function MainContent(props) {
   const { user } = props;
@@ -9,7 +9,7 @@ export default function MainContent(props) {
   async function handlePost(event) {
     event.preventDefault();
     const response = await axios.post(
-      "http://localhost:5000/api/post/add",
+      "/api/post/add",
       {
         description: text,
       },
@@ -23,12 +23,9 @@ export default function MainContent(props) {
 
   useEffect(() => {
     async function getPosts() {
-      const response = await axios.get(
-        "http://localhost:5000/api/post/mypost",
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.get("/api/post/mypost", {
+        withCredentials: true,
+      });
       const posts = response.data;
       if (posts) {
         if (posts.allPost.length) setPostCollection(posts.allPost);

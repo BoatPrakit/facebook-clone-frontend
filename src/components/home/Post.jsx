@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import axios from "axios";
+import axios from "../../axiosInstance/backend.instance";
 export default function Post(props) {
   const { user, post } = props;
   const { firstName, lastName } = user;
   const { _id, postOn, description, isEdited, likes, comments } = post;
   const postDate = new Date(postOn);
   async function deletePost() {
-    await axios.delete(`http://localhost:5000/api/post/delete/${_id}`, {
+    await axios.delete(`/api/post/delete/${_id}`, {
       withCredentials: true,
     });
     props.setShouldReRender(true);

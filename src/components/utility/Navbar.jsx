@@ -2,14 +2,14 @@ import logo from "../../assets/facebook_logo.png";
 import { Link, Redirect } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../App";
-import axios from "axios";
+import axios from "../../axiosInstance/backend.instance";
 import SearchList from "../SearchList/SearchList";
 export default function Navbar() {
   const { user, setUser } = useContext(GlobalContext);
   const [isRedirectToLogin, setIsRedirectToLogin] = useState(false);
   async function logout() {
     try {
-      await axios.get("http://localhost:5000/api/auth/logout", {
+      await axios.get("/api/auth/logout", {
         withCredentials: true,
       });
       setIsRedirectToLogin(true);
