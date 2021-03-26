@@ -19,6 +19,11 @@
   min-height: calc(100vh - var(--height-header));
 }
 
+input, button {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
 /*! tailwindcss v2.0.3 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */

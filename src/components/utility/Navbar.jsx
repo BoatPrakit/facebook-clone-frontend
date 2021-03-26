@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../../App";
 import axios from "../../axiosInstance/backend.instance";
-import SearchList from "../SearchList/SearchList";
+import SearchList from "../searchbox/SearchList";
 export default function Navbar() {
   const { user, setUser } = useContext(GlobalContext);
   const [isRedirectToLogin, setIsRedirectToLogin] = useState(false);
